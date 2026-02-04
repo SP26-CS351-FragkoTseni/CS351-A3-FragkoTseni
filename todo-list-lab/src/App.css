@@ -1,38 +1,98 @@
+/* Main app container */
 .App {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+ 
+/* Header styling */
+h1 {
   text-align: center;
+  color: #333;
+  margin-bottom: 30px;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+ 
+/* Form container */
+.todo-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+ 
+/* Input field styling */
+.todo-input {
+  flex: 1;
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid #ddd;
+  border-radius: 4px;
+  outline: none;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+ 
+.todo-input:focus {
+  border-color: #4CAF50;
+}
+ 
+/* Button styling */
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+ 
+button:hover {
+  background-color: #45a049;
+}
+ 
+/* Delete button specific styling */
+.todo-item button {
+  background-color: #f44336;
+  padding: 5px 15px;
+  font-size: 14px;
+}
+ 
+.todo-item button:hover {
+  background-color: #da190b;
+}
+ 
+/* Todo list container */
+.todo-list {
   display: flex;
   flex-direction: column;
+  gap: 10px;
+}
+ 
+/* Individual todo item styling */
+.todo-item {
+  display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  transition: background-color 0.2s;
 }
-
-.App-link {
-  color: #61dafb;
+ 
+.todo-item:hover {
+  background-color: #f0f0f0;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+ 
+/* Checkbox styling */
+.todo-item input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+ 
+/* Todo text styling */
+.todo-item span {
+  flex: 1;
+  font-size: 16px;
+  color: #333;
 }
