@@ -20,5 +20,4 @@ function App() {
     setInputValue(event.target.value);
   };
 
-  
 }
