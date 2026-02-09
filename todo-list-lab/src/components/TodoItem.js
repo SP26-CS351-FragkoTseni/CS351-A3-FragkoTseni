@@ -1,4 +1,4 @@
-import Button from `./Button`;
+import Button from './Button';
 
 function ToDoItem({ todo, onToggle, onDelete}) {
     //ToDo - object for each tasks(id, text, completed)
