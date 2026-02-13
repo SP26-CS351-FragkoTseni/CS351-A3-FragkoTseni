@@ -1,5 +1,5 @@
 //Import react and the useState hook for state management
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 
 //Import our custom components
@@ -53,6 +53,7 @@ function App() {
 
     //clear the input field
     setInputValue("");
+    setPriority("low");
   };
 
   //This function will toggle a todos completed status
@@ -79,6 +80,34 @@ function App() {
     setTodos(todos.filter(todo => todo.id !== id));
   };
 
+  //this functon edits a todo from the list
+  const editTodo = (id, newText) => {
+    setTodos(
+      todos.map((todo) => {
+        if (todo.id === id) {
+          return {
+            ...todo,
+            text: newText,
+          };
+        } else {
+          return todo;
+        }
+      })
+    );
+  };
+
+  //this function clears completed todos
+  const clearCompleted = () => {
+    setTodos(todos.filter((todo) => !todo.completed));
+  };
+
+  //this function filters the todo list
+  const filteredTodos = todos.filter((todo) => {
+    if (filter ===  "active") return !todo.completed;
+    if (filter === "completed") return todo.completed;
+    return true;
+  });
+
 return(
   <div className = "App">
 
@@ -92,6 +121,17 @@ return(
       placeholder="Enter a new todo..."
       className="todo-input"
       />
+
+      {/* Priority selector */}
+      <select 
+      value = {priority}
+      onChange = {(e) => setPriority(e.target.value)}
+      className = "priority-select"
+      >
+        <option value = "low">Low</option>
+        <option value = "medium">Medium</option>
+        <option value = "high">High</option>
+      </select>
 
       <Button
         type="submit"
