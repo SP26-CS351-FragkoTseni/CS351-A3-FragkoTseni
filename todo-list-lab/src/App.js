@@ -14,6 +14,17 @@ function App() {
   //inputValue string to store current input field
   const [inputValue, setInputValue] = useState("");
 
+  //selecting priority level
+  const [priority, setPriority] = useState("low");
+
+  //filter state (all, active, completed)
+  const [filter, setFilter] = useState("all")
+
+  //save todos localStorage whenever todos change 
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
+
   //this function basically updates inputValue as the user types
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
@@ -34,6 +45,7 @@ function App() {
       id: Date.now(),
       text: inputValue.trim(),
       completed: false,
+      priority: priority,
     };
 
     //Add the new todo to the todos array using spread  operator
