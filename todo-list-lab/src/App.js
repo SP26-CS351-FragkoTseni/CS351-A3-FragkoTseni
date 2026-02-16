@@ -177,6 +177,8 @@ function App() {
               editingId={editingId}
               editValue={editValue}
               setEditValue={setEditValue}
+              onSave={saveEdit}
+              onCancel={cancelEdit}
             />
           ))
         )}
