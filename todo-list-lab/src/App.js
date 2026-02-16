@@ -131,7 +131,7 @@ return(
           value={inputDescriptionValue}
           onChange={handleDescriptionChange}
           placeholder="Enter todo description..."
-          className="todo-input"
+          className="todo-description"
         />
 
       {/* Priority selector */}
@@ -151,16 +151,26 @@ return(
       />
     </form>
 
+     {/* Todo list */}
     <div className="todo-list">
-      {todos.map(todo => (
-        <ToDoItem
-        key={todo.it}
-        todo={todo}
-        onToggle={() => toggleTodo(todo.id)}
-        onDelete={() => deleteTodo(todo.id)}
-        />
-      ))}
+      {todos.length === 0 ? (
+        <p className="no-todos-message">No todos yet!</p>
+      ) : (
+        todos.map((todo) => (
+          <ToDoItem
+            key={todo.id}
+            todo={todo}
+            onToggle={() => toggleTodo(todo.id)}
+            onDelete={() => deleteTodo(todo.id)}
+          />
+        ))
+      )}
     </div>
+
+    {/* Todo count */}
+    <p className="todo-count">
+      {todos.length} {todos.length === 1 ? 'todo' : 'todos'}
+    </p>
   </div>
 );
 
