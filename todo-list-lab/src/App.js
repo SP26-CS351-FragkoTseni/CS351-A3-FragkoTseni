@@ -17,20 +17,20 @@ function App() {
   //inputValue string to store current input field
   const [inputValue, setInputValue] = useState("");
 
-   // input value for description
+  // input value for description
   const [inputDescriptionValue, setInputDescriptionValue] = useState("");
 
   //selecting priority level
-  const [priority, setPriority] = useState("low");
+  const [priority, setPriority] = useState("medium");
 
   //filter state (all, active, completed)
-  const [filter, setFilter] = useState("all")
+  const [filter, setFilter] = useState("all");
 
-  //editing the Id, value 
+  //editing the Id, value
   const [editingId, setEditingId] = useState(null);
   const [editValue, setEditValue] = useState("");
 
-  //save todos localStorage whenever todos change 
+  //save todos localStorage whenever todos change
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
@@ -45,7 +45,7 @@ function App() {
     setInputDescriptionValue(event.target.value);
   };
 
-   // handle adding a new todo with description
+  // handle adding a new todo with description
   const handleSubmit = (event) => {
     event.preventDefault();
     if (inputValue.trim() === "") return;
@@ -55,13 +55,14 @@ function App() {
       text: inputValue.trim(),
       description: inputDescriptionValue.trim(), // add description here
       completed: false,
-      priority: priority,
+      priority,
+      createdAt: new Date().toISOString(),
     };
 
     setTodos([...todos, newToDo]);
     setInputValue("");
     setInputDescriptionValue("");
-    setPriority("low");
+    setPriority("medium");
   };
 
   //This function will toggle a todos completed status
@@ -85,54 +86,60 @@ function App() {
   // this function removes a todo from the list
   const deleteTodo = (id) => {
     //Filter out the todo with the matching id
-    setTodos(todos.filter(todo => todo.id !== id));
+    setTodos(todos.filter((todo) => todo.id !== id));
   };
 
   //this functon edits a todo from the list
-  const editTodo = (id, newText) => {
-    setTodos(
-      todos.map((todo) => {
-        if (todo.id === id) {
-          return {
-            ...todo,
-            text: newText,
-          };
-        } else {
-          return todo;
-        }
-      })
-    );
+  const startEditing = (todo) => {
+    setEditingId(todo.id);
+    setEditValue(todo.text);
   };
 
-  //this function clears completed todos
+  //this function saves the editing version
+  const saveEdit = (id) => {
+    if (!editValue.trim()) return;
+
+    setTodos(
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, text: editValue } : todo,
+      ),
+    );
+
+    setEditingId(null);
+  };
+
+  const cancelEdit = () => {
+    setEditingId(null);
+  };
+
   const clearCompleted = () => {
     setTodos(todos.filter((todo) => !todo.completed));
   };
 
   //this function filters the todo list
   const filteredTodos = todos.filter((todo) => {
-    if (filter ===  "active") return !todo.completed;
+    if (filter === "active") return !todo.completed;
     if (filter === "completed") return todo.completed;
     return true;
   });
 
+  const completedCount = todos.filter(t => t.completed).length;
 
-return(
-  <div className = "App">
+  return (
+    <div className="App">
+      <Header title="My Todo List" />
 
-    <Header title="My Todo List" />
+      <form onSubmit={handleSubmit} className="todo-form">
+        {/*Main todo input */}
+        <input
+          type="text"
+          value={inputValue}
+          onChange={handleInputChange}
+          placeholder="Enter a new todo..."
+          className="todo-input"
+        />
 
-    <form onSubmit={handleSubmit} className="todo-form">
-      {/*Main todo input */}
-      <input
-      type="text"
-      value={inputValue}
-      onChange={handleInputChange}
-      placeholder="Enter a new todo..."
-      className="todo-input"
-      />
-      
-      {/* Description input */}
+        {/* Description input */}
         <input
           type="text"
           value={inputDescriptionValue}
@@ -141,52 +148,46 @@ return(
           className="todo-description"
         />
 
-      {/* Priority selector */}
-      <select 
-      value = {priority}
-      onChange = {(e) => setPriority(e.target.value)}
-      className = "priority-select"
-      >
-        <option value = "low">Low</option>
-        <option value = "medium">Medium</option>
-        <option value = "high">High</option>
-      </select>
+        {/* Priority selector */}
+        <select
+          value={priority}
+          onChange={(e) => setPriority(e.target.value)}
+          className="priority-select"
+        >
+          <option value="low">Low</option>
+          <option value="medium">Medium</option>
+          <option value="high">High</option>
+        </select>
 
-      <Button
-        type="submit"
-        text="Add todo"
-      />
-    </form>
+        <Button type="submit" text="Add todo" />
+      </form>
 
-     {/* Todo list */}
-    <div className="todo-list">
-      {todos.length === 0 ? (
-        <p className="no-todos-message">No todos yet!</p>
-      ) : (
-        todos.map((todo) => (
-          <ToDoItem
-            key={todo.id}
-            todo={todo}
-            onToggle={() => toggleTodo(todo.id)}
-            onDelete={() => deleteTodo(todo.id)}
-            onEdit={() => startEditing(todo)}
-            editingId={editingId}
-            editValue= {editValue}
-            setEditValue={setEditValue}
-            
+      {/* Todo list */}
+      <div className="todo-list">
+        {todos.length === 0 ? (
+          <p className="no-todos-message">No todos yet!</p>
+        ) : (
+          todos.map((todo) => (
+            <ToDoItem
+              key={todo.id}
+              todo={todo}
+              onToggle={() => toggleTodo(todo.id)}
+              onDelete={() => deleteTodo(todo.id)}
+              onEdit={() => startEditing(todo)}
+              editingId={editingId}
+              editValue={editValue}
+              setEditValue={setEditValue}
+            />
+          ))
+        )}
+      </div>
 
-          />
-        ))
-      )}
+      {/* Todo count */}
+      <p className="todo-count">
+        {todos.length} {todos.length === 1 ? "todo" : "todos"}
+      </p>
     </div>
-
-    {/* Todo count */}
-    <p className="todo-count">
-      {todos.length} {todos.length === 1 ? 'todo' : 'todos'}
-    </p>
-  </div>
-);
-
+  );
 }
 
 //Export the App component

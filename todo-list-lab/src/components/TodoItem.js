@@ -1,15 +1,16 @@
 import Button from "./Button";
 
-function ToDoItem({ todo, 
-    onToggle, 
-    onDelete,
-    onEdit,
-    editingId,
-    editValue,
-    setEditValue,
-    onSave,
-    onCancel
-    }) {
+function ToDoItem({
+  todo,
+  onToggle,
+  onDelete,
+  onEdit,
+  editingId,
+  editValue,
+  setEditValue,
+  onSave,
+  onCancel,
+}) {
   //ToDo - object for each tasks(id, text, completed)
   //onToggle - function taht needs to be called when checkbox is clicked
   //onDelete - function to call when to Delete btn is clicked
