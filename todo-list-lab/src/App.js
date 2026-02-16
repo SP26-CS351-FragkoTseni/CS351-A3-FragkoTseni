@@ -26,6 +26,10 @@ function App() {
   //filter state (all, active, completed)
   const [filter, setFilter] = useState("all")
 
+  //editing the Id, value 
+  const [editingId, setEditingId] = useState(null);
+  const [editValue, setEditValue] = useState("");
+
   //save todos localStorage whenever todos change 
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
