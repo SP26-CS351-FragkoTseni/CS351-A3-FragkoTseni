@@ -9,7 +9,10 @@ import ToDoItem from "./components/TodoItem";
 
 function App() {
   //todos array to store all todo items
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState(() => {
+    const saved = localStorage.getItem("todos");
+    return saved ? JSON.parse(saved) : [];
+  });
 
   //inputValue string to store current input field
   const [inputValue, setInputValue] = useState("");
