@@ -14,6 +14,9 @@ function App() {
   //inputValue string to store current input field
   const [inputValue, setInputValue] = useState("");
 
+   // input value for description
+  const [inputDescriptionValue, setInputDescriptionValue] = useState("");
+
   //selecting priority level
   const [priority, setPriority] = useState("low");
 
@@ -30,29 +33,27 @@ function App() {
     setInputValue(event.target.value);
   };
 
-  // this function to add a new todo to the list
+  // handle description input change
+  const handleDescriptionChange = (event) => {
+    setInputDescriptionValue(event.target.value);
+  };
+
+   // handle adding a new todo with description
   const handleSubmit = (event) => {
-    //Prevent default form submittion (which will reload the page and cause data loss)
     event.preventDefault();
+    if (inputValue.trim() === "") return;
 
-    //Check if input is empty after removing the whitespace
-    if (inputValue.trim() === "") {
-      return;
-    }
-
-    //Create a new todo obj
     const newToDo = {
       id: Date.now(),
       text: inputValue.trim(),
+      description: inputDescriptionValue.trim(), // add description here
       completed: false,
       priority: priority,
     };
 
-    //Add the new todo to the todos array using spread  operator
     setTodos([...todos, newToDo]);
-
-    //clear the input field
     setInputValue("");
+    setInputDescriptionValue("");
     setPriority("low");
   };
 
@@ -108,12 +109,14 @@ function App() {
     return true;
   });
 
+
 return(
   <div className = "App">
 
     <Header title="My Todo List" />
 
     <form onSubmit={handleSubmit} className="todo-form">
+      {/*Main todo input */}
       <input
       type="text"
       value={inputValue}
@@ -121,6 +124,15 @@ return(
       placeholder="Enter a new todo..."
       className="todo-input"
       />
+      
+      {/* Description input */}
+        <input
+          type="text"
+          value={inputDescriptionValue}
+          onChange={handleDescriptionChange}
+          placeholder="Enter todo description..."
+          className="todo-input"
+        />
 
       {/* Priority selector */}
       <select 
