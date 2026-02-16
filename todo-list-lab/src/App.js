@@ -166,7 +166,7 @@ function App() {
       </form>
 
 {/* Filter Buttons */}
-<div className="filter-buttons">
+<div>
   <button
           className={`filter-button ${filter === "all" ? "active" : ""}`}
           onClick={() => setFilter("all")}
