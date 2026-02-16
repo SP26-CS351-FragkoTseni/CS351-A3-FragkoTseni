@@ -169,6 +169,12 @@ return(
             todo={todo}
             onToggle={() => toggleTodo(todo.id)}
             onDelete={() => deleteTodo(todo.id)}
+            onEdit={() => startEditing(todo)}
+            editingId={editingId}
+            editValue= {editValue}
+            setEditValue={setEditValue}
+            
+
           />
         ))
       )}
