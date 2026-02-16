@@ -21,7 +21,8 @@ h1 {
 }
  
 /* Input field styling */
-.todo-input {
+.todo-input,
+.todo-description {
   flex: 1;
   padding: 10px;
   font-size: 16px;
@@ -95,15 +96,6 @@ button:hover {
   flex: 1;
   font-size: 16px;
   color: #333;
-}
-
-.todo-description {
-  flex: 1;
-  padding: 10px;
-  font-size: 16px;
-  border: 2px solid #ddd;
-  border-radius: 4px;
-  outline: none;
 }
 
 /* Style for the "No todos yet!" message */

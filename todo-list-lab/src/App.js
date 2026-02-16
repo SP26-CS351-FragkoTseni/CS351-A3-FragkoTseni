@@ -123,7 +123,10 @@ function App() {
     return true;
   });
 
+  //Counts
+  const totalCount = todos.length;
   const completedCount = todos.filter(t => t.completed).length;
+  const activeCount = todos.filter((t) => !t.completed).length;
 
   return (
     <div className="App">
@@ -161,6 +164,29 @@ function App() {
 
         <Button type="submit" text="Add todo" />
       </form>
+
+{/* Filter Buttons */}
+<div className="filter-buttons">
+  <button
+          className={`filter-button ${filter === "all" ? "active" : ""}`}
+          onClick={() => setFilter("all")}
+        >
+         All ({totalCount})
+        </button>
+        <button
+          className={`filter-button ${filter === "active" ? "active" : ""}`}
+          onClick={() => setFilter("active")}
+        >
+          Active ({activeCount})
+        </button>
+        <button
+          className={`filter-button ${filter === "completed" ? "active" : ""}`}
+          onClick={() => setFilter("completed")}
+        >
+          Completed ({completedCount})
+        </button>
+      </div>
+
 
       {/* Todo list */}
       <div className="todo-list">

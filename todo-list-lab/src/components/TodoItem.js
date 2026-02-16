@@ -16,8 +16,21 @@ function ToDoItem({
   //onDelete - function to call when to Delete btn is clicked
   const isEditing = todo.id === editingId;
 
+  // Determine border color based on todo status
+  const borderColor = todo.completed ? "green": "purple";
+
   return (
-    <div className="todo-item" style={{ display: "flex", alignItems: "center", marginBottom: "10px" }}>
+    <div className="todo-item" 
+    style={{ display: "flex", 
+    alignItems: "center", 
+    marginBottom: "10px",
+    padding: "10px",
+    border: '2px solid ${borderColor}',
+    borderRadius: "5px",
+    backgroundColor: "#fff" 
+    }}
+    >
+
       {/* Checkbox to toggle status */}
       <input type="checkbox" checked={todo.completed} onChange={onToggle} />
 
