@@ -16,16 +16,22 @@ function ToDoItem({
   //onDelete - function to call when to Delete btn is clicked
   const isEditing = todo.id === editingId;
 
-  // Determine border color based on todo status
-  const borderColor = todo.completed ? "green": "purple";
+  const priorityColors = {
+  high: "red",
+  medium: "yellow",
+  low: "green",
+};
+
+  // Get the color based on the todo's priority
+  const borderColor = priorityColors[todo.priority] || "gray";
 
   return (
     <div className="todo-item" 
-    style={{ display: "flex", 
+    style={{ border: '2px solid ${borderColor}',
+    display: "flex", 
     alignItems: "center", 
     marginBottom: "10px",
     padding: "10px",
-    border: '2px solid ${borderColor}',
     borderRadius: "5px",
     backgroundColor: "#fff" 
     }}

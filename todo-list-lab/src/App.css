@@ -112,3 +112,23 @@ button:hover {
   margin-top: 10px;
   font-weight: bold;
 }
+
+
+/*Priority Colors*/
+.priority-low {
+  background-color: transparent;
+  border: 2px solid #4CAF50;
+  color: #4CAF50;
+}
+
+.priority-medium {
+  background-color: transparent;
+  border: 2px solid #FFEB3B;
+  color: #FFEB3B;
+}
+
+.priority-high {
+  background-color: transparent;
+  border: 2px solid #F44336;
+  color: #F44336;
+}

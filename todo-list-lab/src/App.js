@@ -157,10 +157,13 @@ function App() {
           onChange={(e) => setPriority(e.target.value)}
           className="priority-select"
         >
-          <option value="low">Low</option>
-          <option value="medium">Medium</option>
-          <option value="high">High</option>
+          <option className={`priority-low ${priority === "low" ? "selected" : ""}`} value="low">Low</option>
+          <option className={`priority-medium ${priority === "medium" ? "selected" : ""}`} value="medium">Medium</option>
+          <option className={`priority-high ${priority === "high" ? "selected" : ""}`} value="high">High</option>
         </select>
+
+        <div className="priority-buttons">
+</div>
 
         <Button type="submit" text="Add todo" />
       </form>
