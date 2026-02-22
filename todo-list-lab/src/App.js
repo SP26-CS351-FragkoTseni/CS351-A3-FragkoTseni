@@ -157,24 +157,38 @@ function App() {
           onChange={(e) => setPriority(e.target.value)}
           className="priority-select"
         >
-          <option className={`priority-low ${priority === "low" ? "selected" : ""}`} value="low">Low</option>
-          <option className={`priority-medium ${priority === "medium" ? "selected" : ""}`} value="medium">Medium</option>
-          <option className={`priority-high ${priority === "high" ? "selected" : ""}`} value="high">High</option>
+          <option
+            className={`priority-low ${priority === "low" ? "selected" : ""}`}
+            value="low"
+          >
+            Low
+          </option>
+          <option
+            className={`priority-medium ${priority === "medium" ? "selected" : ""}`}
+            value="medium"
+          >
+            Medium
+          </option>
+          <option
+            className={`priority-high ${priority === "high" ? "selected" : ""}`}
+            value="high"
+          >
+            High
+          </option>
         </select>
 
-        <div className="priority-buttons">
-</div>
+        <div className="priority-buttons"></div>
 
         <Button type="submit" text="Add todo" />
       </form>
 
-{/* Filter Buttons */}
-<div>
-  <button
+      {/* Filter Buttons */}
+      <div>
+        <button
           className={`filter-button ${filter === "all" ? "active" : ""}`}
           onClick={() => setFilter("all")}
         >
-         All ({totalCount})
+          All ({totalCount})
         </button>
         <button
           className={`filter-button ${filter === "active" ? "active" : ""}`}
@@ -190,6 +204,12 @@ function App() {
         </button>
       </div>
 
+      {/* Clear Completed button */}
+      {completedCount > 0 && (
+        <button className="clear-completed-button" onClick={clearCompleted}>
+          Clear Completed
+        </button>
+      )}
 
       {/* Todo list */}
       <div className="todo-list">

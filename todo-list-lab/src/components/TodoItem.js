@@ -22,8 +22,10 @@ function ToDoItem({
   low: "green",
 };
 
-  // Get the color based on the todo's priority
-  const borderColor = priorityColors[todo.priority] || "gray";
+
+  //Time Stamp
+  const dateOptions = { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+  const formattedDate = new Date(todo.createdAt).toLocaleString(undefined, dateOptions);
 
   return (
     <div className="todo-item" 
@@ -62,6 +64,8 @@ function ToDoItem({
         </span>
       )}
 
+      
+
       {/* Display description if exists */}
       {todo.description && (
         <div
@@ -73,8 +77,15 @@ function ToDoItem({
           }}
         >
           {todo.description}
+          <span style={{ fontWeight: "bold" }}>[{todo.priority}]</span>
         </div>
       )}
+      
+
+      <div style={{ display: "flex", alignItems: "center", gap: "80px" }}>
+  <div style={{ fontSize: "0.8em", color: "#555" }}>ID: {todo.id}</div>
+  <div style={{ fontSize: "0.8em", color: "#555", paddingLeft: "10px" }}>Created: {formattedDate}</div>
+</div>
 
       {/* ----Buttons---- */}
       {isEditing ? (
